@@ -2,38 +2,52 @@
 let movieInfo = movies.map(movie => movieDetails.filter(details => details.title === movie.title));
 let movieCatalog = [...movies, ...movieInfo].filter(movie => movie.title !== undefined);
 
-document.write(JSON.stringify(movieCatalog));
+let movieListDiv = document.getElementById("movieList");
 
-// let movieListDiv = document.getElementById("movieList");
+let movieCompare = function(movie) {
+    for (let detail of movieDetails) {
+        if (movie.title === detail.title) {
+            return detail.imageUrl;
+        }
+    }
+}
 
-// let movieListRender = movieCatalog.forEach(movie => {
-//     movieListDiv.innerHTML += `
-//         <div class="movieDiv">
-//             <img src="${movie.imageUrl}" width="100px">
-//             <h2>${movie.title}</h2>
-//             <p><strong>Starring</strong>: ${movie.cast}</p>
-//             <h6>Released: ${movie.year}</p>
-//         </div>`;
-// })
+let movieListRender = movieCatalog.forEach(movie => {
+    for (let detail of movieDetails) {
+        if (movie.title === detail.title) {
+            movieListDiv.innerHTML += `
+            <div class="movieDiv">
+                <img src="${movieCompare(movie)}" width="150px">
+                <h2>${movie.title}</h2>
+                <p><strong>Starring</strong>: ${movie.cast}</p>
+                <h6>Released: ${movie.year}</p>
+            </div>`;
+        }
+    }
+})
 
-// let searchButton = document.getElementById("searchButton");
-// let searchBar = document.getElementById("searchBar");
+let titleSearchButton = document.getElementById("titleSearchButton");
+let titleSearchBar = document.getElementById("titleSearchBar");
 
-// searchButton.addEventListener("click", () => {
-//     movieListDiv.innerHTML = "";
-//     movieListRender = movieCatalog.filter(function(movie) {
-//         return movie.title.toLowerCase().includes(searchBar.value.toLowerCase());
-//     });
-//     movieListRender.forEach(result => {
-//         movieListDiv.innerHTML += `
-//             <div class="movieDiv">
-//                 <img src="${result.imageUrl}" width="100px">
-//                 <h2>${result.title}</h2>
-//                 <p><strong>Starring</strong>: ${result.cast}</p>
-//                 <h6>Released: ${result.year}</p>
-//             </div>`;
-//     });
-// });
+titleSearchButton.addEventListener("click", () => {
+    movieListDiv.innerHTML = "";
+    movieListRender = movieCatalog.filter(function(movie) {
+        return movie.title.toLowerCase().includes(titleSearchBar.value.toLowerCase());
+    });
+    movieListRender.forEach(result => {
+        for (let detail of movieDetails) {
+            if (result.title === detail.title) {
+                movieListDiv.innerHTML += `
+                <div class="movieDiv">
+                    <img src="${movieCompare(result)}" width="150px">
+                    <h2>${result.title}</h2>
+                    <p><strong>Starring</strong>: ${result.cast}</p>
+                    <h6>Released: ${result.year}</p>
+                </div>`;
+            }
+        }
+    });
+});
 
-// console.log("Movies:", movies);
-// console.log("MovieDetails:", movieDetails);
+console.log("Movies:", movies);
+console.log("MovieDetails:", movieDetails);

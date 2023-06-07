@@ -5,9 +5,17 @@ body {
     min-width: 700px;
     max-width: 800px;
 }
+input {
+    margin: 10px 0px;
+}
+
+button {
+    margin: 10px;
+}
 
 #movieList {
     margin: auto;
+    margin-top: 10px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
