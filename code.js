@@ -2,28 +2,38 @@
 let movieInfo = movies.map(movie => movieDetails.filter(details => details.title === movie.title));
 let movieCatalog = [...movies, ...movieInfo].filter(movie => movie.title !== undefined);
 
-let movieListDiv = document.getElementById("movieList");
-// let movieListDivID = "";
+document.write(JSON.stringify(movieCatalog));
 
-let movieListRender = movieCatalog.forEach(movie => {
-    // movieListDivID = `${movie.title.toLowerCase()}`.replace(/[^a-z0-9]+/ig, "");
-    movieListDiv.innerHTML += `<div class="movieDiv">${movie.title}</div>`;
-})
+// let movieListDiv = document.getElementById("movieList");
 
-let searchButton = document.getElementById("searchButton");
-let searchBar = document.getElementById("searchBar");
+// let movieListRender = movieCatalog.forEach(movie => {
+//     movieListDiv.innerHTML += `
+//         <div class="movieDiv">
+//             <img src="${movie.imageUrl}" width="100px">
+//             <h2>${movie.title}</h2>
+//             <p><strong>Starring</strong>: ${movie.cast}</p>
+//             <h6>Released: ${movie.year}</p>
+//         </div>`;
+// })
 
-searchButton.addEventListener("click", () => {
-    movieListDiv.innerHTML = "";
-    movieListRender = movieCatalog.filter(function(movie) {
-        return movie.title.toLowerCase().includes(searchBar.value.toLowerCase());
-    });
-    movieListRender.forEach(result => {
-        movieListDiv.innerHTML += `<li>${result.title}</li>`
-    });
-});
+// let searchButton = document.getElementById("searchButton");
+// let searchBar = document.getElementById("searchBar");
 
-// document.write(JSON.stringify(movieCatalog));
+// searchButton.addEventListener("click", () => {
+//     movieListDiv.innerHTML = "";
+//     movieListRender = movieCatalog.filter(function(movie) {
+//         return movie.title.toLowerCase().includes(searchBar.value.toLowerCase());
+//     });
+//     movieListRender.forEach(result => {
+//         movieListDiv.innerHTML += `
+//             <div class="movieDiv">
+//                 <img src="${result.imageUrl}" width="100px">
+//                 <h2>${result.title}</h2>
+//                 <p><strong>Starring</strong>: ${result.cast}</p>
+//                 <h6>Released: ${result.year}</p>
+//             </div>`;
+//     });
+// });
 
-console.log("Movies:", movies);
-console.log("MovieDetails:", movieDetails);
+// console.log("Movies:", movies);
+// console.log("MovieDetails:", movieDetails);
